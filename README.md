@@ -10,6 +10,7 @@ Yet Another Todo App
 [![Editor Config](https://img.shields.io/badge/Editor%20Config-1.0.1-crimson.svg?style=flat-square)][4]
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)][3]
 [![eslint](https://img.shields.io/badge/code%20style-eslint-green.svg?style=flat-square)][10]
+[![prettier](https://img.shields.io/badge/code%20style-prettier-ff69b4.svg?style=flat-square)][11]
 
 ## Install
 
@@ -68,3 +69,4 @@ The project is available as open source under the terms of the [MIT][1] [License
 [8]: https://pre-commit.com 'A framework for managing and maintaining multi-language pre-commit hooks'
 [9]: https://nx.dev 'Nx, a Smart, fast and extensible build system'
 [10]: https://eslint.org 'ESLint'
+[11]: https://prettier.io 'Prettier: Opinionated Code Formatter'
