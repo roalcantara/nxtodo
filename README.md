@@ -2,6 +2,7 @@
 
 [![Build](https://github.com/roalcantara/nxtodo/actions/workflows/build.yml/badge.svg)](https://github.com/roalcantara/nxtodo/actions/workflows/build.yml)
 [![Release](https://github.com/roalcantara/nxtodo/actions/workflows/release.yml/badge.svg)](https://github.com/roalcantara/nxtodo/actions/workflows/release.yml)
+[![Deployment](https://github.com/roalcantara/nxtodo/actions/workflows/deployment.yml/badge.svg)](https://github.com/roalcantara/nxtodo/actions/workflows/deployment.yml)
 
 Yet Another Todo App
 
@@ -56,6 +57,7 @@ npx nx format:write
 - [Nx, a Smart, fast and extensible build system][9]
 - [Lighthouse: Open-source, automated tool for improving the quality of web pages][12]
 - [Semantic Release][13]
+- [Firebase: Hosting][14]
 
 ## Contributing
 
@@ -82,3 +84,4 @@ The project is available as open source under the terms of the [MIT][1] [License
 [11]: https://prettier.io 'Prettier: Opinionated Code Formatter'
 [12]: https://developers.google.com/web/tools/lighthouse 'Lighthouse: Open-source, automated tool for improving the quality of web pages'
 [13]: https://semantic-release.gitbook.io/semantic-release 'Semantic Release'
+[14]: https://firebase.google.com/docs/hosting 'Firebase: Hosting'
