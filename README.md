@@ -1,6 +1,7 @@
 # Nx Todo
 
-[![Build](https://github.com/roalcantara/nxtodo/actions/workflows/build.yml/badge.svg)]
+[![Build](https://github.com/roalcantara/nxtodo/actions/workflows/build.yml/badge.svg)](https://github.com/roalcantara/nxtodo/actions/workflows/build.yml)
+[![Release](https://github.com/roalcantara/nxtodo/actions/workflows/release.yml/badge.svg)](https://github.com/roalcantara/nxtodo/actions/workflows/release.yml)
 
 Yet Another Todo App
 
@@ -11,6 +12,7 @@ Yet Another Todo App
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)][3]
 [![eslint](https://img.shields.io/badge/code%20style-eslint-green.svg?style=flat-square)][10]
 [![prettier](https://img.shields.io/badge/code%20style-prettier-ff69b4.svg?style=flat-square)][11]
+[![Semantic Release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)][13]
 
 ## Install
 
@@ -39,6 +41,12 @@ npx nx build tasks
 
 # start the development server at http://localhost:4200
 npx nx serve tasks
+
+# check files formatting
+npx nx format:check
+
+# format files
+npx nx format:write
 ```
 
 ## Acknowledgements
@@ -47,6 +55,7 @@ npx nx serve tasks
 - [Conventional Commits][3]
 - [Nx, a Smart, fast and extensible build system][9]
 - [Lighthouse: Open-source, automated tool for improving the quality of web pages][12]
+- [Semantic Release][13]
 
 ## Contributing
 
@@ -72,3 +81,4 @@ The project is available as open source under the terms of the [MIT][1] [License
 [10]: https://eslint.org 'ESLint'
 [11]: https://prettier.io 'Prettier: Opinionated Code Formatter'
 [12]: https://developers.google.com/web/tools/lighthouse 'Lighthouse: Open-source, automated tool for improving the quality of web pages'
+[13]: https://semantic-release.gitbook.io/semantic-release 'Semantic Release'
