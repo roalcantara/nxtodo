@@ -21,6 +21,11 @@ defaults:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
     if: "!contains(toJSON(github.event.commits.*.message), '[skip-ci]') && !contains(toJSON(github.event.commits.*.message), '[skip ci]')"
     steps:
       - uses: actions/checkout@v3
@@ -32,7 +37,7 @@ jobs:
         with:
           semantic_version: ${{ env.SEMANTIC_VERSION }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - if: steps.semantic.outputs.new_release_published == 'true'
         shell: bash
         run: |
