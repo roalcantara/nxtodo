@@ -41,6 +41,12 @@ npx nx build tasks
 
 # start the development server at http://localhost:4200
 npx nx serve tasks
+
+# check files formatting
+npx nx format:check
+
+# format files
+npx nx format:write
 ```
 
 ## Acknowledgements

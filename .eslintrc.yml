@@ -14,6 +14,7 @@ plugins:
   - '@typescript-eslint'
   - eslint-comments
   - 'no-loops'
+  - prettier
 extends:
   - airbnb-typescript/base
   - plugin:@typescript-eslint/recommended
@@ -22,6 +23,7 @@ extends:
   - plugin:import/typescript
   - plugin:eslint-comments/recommended
   - plugin:node/recommended
+  - plugin:prettier/recommended
 settings:
   jest:
     version: latest
@@ -32,6 +34,7 @@ overrides:
       - '*.js'
       - '*.jsx'
     rules:
+      prettier/prettier: error
       '@nx/enforce-module-boundaries':
         - error
         - enforceBuildableLibDependency: true
