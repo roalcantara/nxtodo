@@ -1,0 +1,34 @@
+name: Deployment
+
+on:
+  release:
+    types:
+      - created
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.firebase.outputs.details_url }}
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install && npx nx build tasks --prod
+      - id: firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          channelId: live
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          projectId: tasks-cf5fa
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TASKS_CF5FA }}
