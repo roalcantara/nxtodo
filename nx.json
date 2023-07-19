@@ -22,7 +22,7 @@
     "lint": {
       "inputs": [
         "default",
-        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintrc.yml",
         "{workspaceRoot}/.eslintignore"
       ]
     }
@@ -33,7 +33,7 @@
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/.eslintrc.json"
+      "!{projectRoot}/.eslintrc.yml"
     ],
     "sharedGlobals": []
   },
