@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "11.11.0",
+    "@lhci/cli": "^0.12.0",
     "@nx/cypress": "16.5.3",
     "@nx/eslint-plugin": "16.5.3",
     "@nx/js": "16.5.3",

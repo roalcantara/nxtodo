@@ -46,6 +46,7 @@ npx nx serve tasks
 - [Standard Readme][5]
 - [Conventional Commits][3]
 - [Nx, a Smart, fast and extensible build system][9]
+- [Lighthouse: Open-source, automated tool for improving the quality of web pages][12]
 
 ## Contributing
 
@@ -70,3 +71,4 @@ The project is available as open source under the terms of the [MIT][1] [License
 [9]: https://nx.dev 'Nx, a Smart, fast and extensible build system'
 [10]: https://eslint.org 'ESLint'
 [11]: https://prettier.io 'Prettier: Opinionated Code Formatter'
+[12]: https://developers.google.com/web/tools/lighthouse 'Lighthouse: Open-source, automated tool for improving the quality of web pages'

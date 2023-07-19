@@ -72,6 +72,17 @@
       "options": {
         "buildTarget": "tasks:build"
       }
+    },
+    "lhci": {
+      "executor": "nx:run-commands",
+      "options": {
+        "color": true,
+        "parallel": false,
+        "commands": [
+          "npx nx run tasks:build:prod",
+          "lhci autorun --collect.isSinglePageApplication=true --collect.staticDistDir=./dist/apps/tasks"
+        ]
+      }
     }
   },
   "tags": []
