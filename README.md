@@ -48,6 +48,15 @@ npx nx format:check
 
 # format files
 npx nx format:write
+
+# deploy hosting
+npm run deploy:hosting
+
+# deploy functions
+npm run deploy:functions
+
+# deploy firestore:rules
+npm run deploy:firestore:rules
 ```
 
 ## Acknowledgements
