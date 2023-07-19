@@ -2,11 +2,17 @@
   "name": "@nxtodo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "deploy:hosting": "npx firebase deploy --only hosting",
+    "deploy:functions": "npx firebase deploy --only functions",
+    "deploy:firestore:rules": "npx firebase deploy --only firestore:rules"
+  },
   "private": true,
   "dependencies": {
-    "@emotion/react": "11.11.1",
-    "@emotion/styled": "11.11.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.1",
+    "@mui/material": "^5.14.1",
     "@swc/helpers": "~0.5.1",
     "firebase": "^10.0.0",
     "firebase-admin": "^11.10.1",
