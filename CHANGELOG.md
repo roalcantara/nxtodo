@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/roalcantara/nxtodo/compare/v1.0.0...v1.1.0) (2023-07-19)
+
+
+### Features
+
+* **tasks:** Add Authentication and tasks ([e15030b](https://github.com/roalcantara/nxtodo/commit/e15030ba3e3a7bd71c5970a134716d4f1992725a)), closes [#8](https://github.com/roalcantara/nxtodo/issues/8) [#9](https://github.com/roalcantara/nxtodo/issues/9) [#10](https://github.com/roalcantara/nxtodo/issues/10)
+
 # 1.0.0 (2023-07-19)
 
 
