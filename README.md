@@ -9,6 +9,7 @@ Yet Another Todo App
 [![Standard Readme](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)][5]
 [![Editor Config](https://img.shields.io/badge/Editor%20Config-1.0.1-crimson.svg?style=flat-square)][4]
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)][3]
+[![eslint](https://img.shields.io/badge/code%20style-eslint-green.svg?style=flat-square)][10]
 
 ## Install
 
@@ -44,7 +45,6 @@ npx nx serve tasks
 - [Standard Readme][5]
 - [Conventional Commits][3]
 - [Nx, a Smart, fast and extensible build system][9]
-- [Lighthouse: Open-source, automated tool for improving the quality of web pages][10]
 
 ## Contributing
 
@@ -67,3 +67,4 @@ The project is available as open source under the terms of the [MIT][1] [License
 [7]: https://jorisroovers.com/gitlint 'git commit message linter'
 [8]: https://pre-commit.com 'A framework for managing and maintaining multi-language pre-commit hooks'
 [9]: https://nx.dev 'Nx, a Smart, fast and extensible build system'
+[10]: https://eslint.org 'ESLint'
