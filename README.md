@@ -1,5 +1,7 @@
 # Nx Todo
 
+[![Build](https://github.com/roalcantara/nxtodo/actions/workflows/build.yml/badge.svg)]
+
 Yet Another Todo App
 
 [![MIT license](https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square)](LICENSE)
