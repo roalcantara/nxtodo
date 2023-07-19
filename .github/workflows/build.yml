@@ -38,3 +38,24 @@ jobs:
       - run: npx nx affected -t lhci
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+  build_and_preview:
+    needs: main
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    environment:
+      name: preview
+      url: ${{ steps.firebase.outputs.details_url }}
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci && npx nx build tasks --prod
+      - id: firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TASKS_CF5FA }}
+          projectId: tasks-cf5fa
