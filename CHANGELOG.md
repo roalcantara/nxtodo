@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/roalcantara/nxtodo/compare/v1.1.0...v1.2.0) (2023-07-21)
+
+
+### Features
+
+* **tasks:** Allow to complete, block & delete ([bd8d788](https://github.com/roalcantara/nxtodo/commit/bd8d7884342593e4f2bfc259643bf20ab6f9d8e3)), closes [#9](https://github.com/roalcantara/nxtodo/issues/9) [#10](https://github.com/roalcantara/nxtodo/issues/10)
+* **tasks:** Restrict writing tasks ([a195c00](https://github.com/roalcantara/nxtodo/commit/a195c00c53ef2f309ef439971a56358b0958e18d))
+
 # [1.1.0](https://github.com/roalcantara/nxtodo/compare/v1.0.0...v1.1.0) (2023-07-19)
 
 
