@@ -83,6 +83,18 @@
           "lhci autorun --collect.isSinglePageApplication=true --collect.staticDistDir=./dist/apps/tasks"
         ]
       }
+    },
+    "emulate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "npm run clear",
+          "npx nx run tasks:build:production --watch &",
+          "sleep 3",
+          "npx firebase emulators:start --only hosting,auth"
+        ]
+      }
     }
   },
   "tags": []

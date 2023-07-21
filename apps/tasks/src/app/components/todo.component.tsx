@@ -1,69 +1,147 @@
-import styled from '@emotion/styled'
-import DeleteIcon from '@mui/icons-material/Delete'
-import {
-  FormControlLabel,
-  FormGroup,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Switch
-} from '@mui/material'
-import { doc, deleteDoc, updateDoc } from 'firebase/firestore'
-import { db, auth } from '../db/fire.service'
+import { User } from '@firebase/auth'
+import { Icon, Tooltip, IconButton } from '@mui/material'
+import { Box, Text } from 'dracula-ui'
+import { useState } from 'react'
+import { canDone } from '../domain'
 import { Task } from '../domain/task.model'
 
-const StyledList = styled.div`
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-`
+export const Todo = ({
+  task,
+  enabled,
+  onSave,
+  onDelete,
+  currentUser
+}: {
+  task: Task
+  enabled: boolean
+  onSave: (id: string, task: Partial<Task>) => void
+  onDelete: (id: string) => void
+  currentUser: User | null
+}) => {
+  const [isBlockHover, setIsBlockHover] = useState(false)
+  const [isDoneHover, setIsDoneHover] = useState(false)
+  const [isDeleteHover, setIsDeleteHover] = useState(false)
+  const [isDetail, setIsDetail] = useState(false)
 
-const Todo = ({ todo }: { todo: Required<Task> }) => (
-  <StyledList>
-    <ListItem>
-      <ListItemAvatar />
-      <ListItemText primary={todo.title} secondary={todo.createdByName} />
-      {todo.createdBy === auth?.currentUser?.uid && (
-        <DeleteIcon
-          fontSize="large"
-          style={{ opacity: todo.status === 'pending' ? 1 : 0.3 }}
-          onClick={() => {
-            if (
-              todo.status === 'pending' &&
-              todo.createdBy === auth?.currentUser?.uid
-            ) {
-              deleteDoc(doc(db, 'tasks', todo.id))
-            }
-          }}
-        />
-      )}
-
-      <FormGroup>
-        <FormControlLabel
-          label="Blocked"
-          control={
-            <Switch
-              disabled={
-                todo.status === 'done' ||
-                todo.createdBy !== auth?.currentUser?.uid
-              }
-              defaultChecked={todo.status === 'blocked'}
-              onChange={e => {
+  return (
+    <Box
+      onDoubleClick={() => {
+        if (enabled) setIsDetail(value => !value)
+      }}
+      color="black"
+      display="flex"
+      p="sm"
+      mb="xs"
+      rounded="lg"
+      as="article"
+    >
+      <Box
+        display="flex"
+        pr="sm"
+        style={{ flexDirection: 'column', stroke: 'context-stroke' }}
+      >
+        <Text
+          color={task.status === 'done' ? 'blackSecondary' : 'purpleCyan'}
+          style={{ wordBreak: 'break-all' }}
+        >
+          {task.title}
+        </Text>
+        {isDetail && (
+          <Text mt="xs" color="blackSecondary">
+            {task.status} ∙ {task.id}
+          </Text>
+        )}
+      </Box>
+      <Box display="flex" pr="sm">
+        <Tooltip title={task.status === 'blocked' ? 'Unblock' : 'Block'}>
+          <span>
+            <IconButton
+              onMouseEnter={() => setIsBlockHover(true)}
+              onMouseLeave={() => setIsBlockHover(false)}
+              onClick={() => {
                 if (
-                  todo.status === 'pending' &&
-                  todo.createdBy === auth?.currentUser?.uid
+                  enabled &&
+                  currentUser?.uid === task.userId &&
+                  task.status !== 'done'
                 ) {
-                  updateDoc(doc(db, 'tasks', todo.id), {
-                    status: e.target.checked ? 'blocked' : 'active'
+                  onSave(String(task.id), {
+                    status: task.status === 'open' ? 'blocked' : 'open'
                   })
+                } else {
+                  alert('You are not authorized to perform this action')
                 }
               }}
-            />
-          }
-        />
-      </FormGroup>
-    </ListItem>
-  </StyledList>
-)
+            >
+              <Icon
+                color={
+                  enabled &&
+                  currentUser?.uid === task.userId &&
+                  task.status !== 'done'
+                    ? isBlockHover
+                      ? 'warning'
+                      : 'action'
+                    : 'disabled'
+                }
+                sx={{ fontSize: 40 }}
+              >
+                {task.status === 'blocked'
+                  ? 'play_circle_outline'
+                  : 'pause_circle_outline'}
+              </Icon>
+            </IconButton>
+          </span>
+        </Tooltip>
 
-export default Todo
+        <Tooltip title="Complete">
+          <IconButton
+            onMouseEnter={() => setIsDoneHover(true)}
+            onMouseLeave={() => setIsDoneHover(false)}
+            onClick={() => {
+              if (enabled && canDone(task)) {
+                onSave(String(task.id), {
+                  status: 'done'
+                })
+              } else {
+                alert('You are not authorized to perform this action')
+              }
+            }}
+          >
+            <Icon
+              color={
+                task.status !== 'done' && task.status !== 'blocked'
+                  ? isDoneHover
+                    ? 'success'
+                    : 'action'
+                  : 'disabled'
+              }
+              sx={{ fontSize: 40 }}
+            >
+              check_circle_outline
+            </Icon>
+          </IconButton>
+        </Tooltip>
+
+        <Tooltip title="Delete">
+          <IconButton
+            onMouseEnter={() => setIsDeleteHover(true)}
+            onMouseLeave={() => setIsDeleteHover(false)}
+            onClick={() => {
+              if (enabled) {
+                onDelete(String(task.id))
+              } else {
+                alert('You are not authorized to perform this action')
+              }
+            }}
+          >
+            <Icon
+              color={isDeleteHover ? 'error' : 'action'}
+              sx={{ fontSize: 40 }}
+            >
+              remove_circle_outline
+            </Icon>
+          </IconButton>
+        </Tooltip>
+      </Box>
+    </Box>
+  )
+}

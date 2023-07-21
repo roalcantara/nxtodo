@@ -55,8 +55,11 @@ npm run deploy:hosting
 # deploy functions
 npm run deploy:functions
 
-# deploy firestore:rules
+# deploy firestore rules
 npm run deploy:firestore:rules
+
+# deploy firestore rules and indexes
+npm run deploy:firestore
 ```
 
 ## Acknowledgements
@@ -67,6 +70,7 @@ npm run deploy:firestore:rules
 - [Lighthouse: Open-source, automated tool for improving the quality of web pages][12]
 - [Semantic Release][13]
 - [Firebase: Hosting][14]
+- [Firebase: Use the CLI with CI systems][15]
 
 ## Contributing
 
@@ -94,3 +98,4 @@ The project is available as open source under the terms of the [MIT][1] [License
 [12]: https://developers.google.com/web/tools/lighthouse 'Lighthouse: Open-source, automated tool for improving the quality of web pages'
 [13]: https://semantic-release.gitbook.io/semantic-release 'Semantic Release'
 [14]: https://firebase.google.com/docs/hosting 'Firebase: Hosting'
+[15]: https://firebase.google.com/docs/cli#cli-ci-systems 'Firebase: Use the CLI with CI systems'
