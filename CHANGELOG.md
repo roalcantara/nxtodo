@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/roalcantara/nxtodo/compare/v1.2.0...v1.2.1) (2023-07-21)
+
+
+### Bug Fixes
+
+* **ci:** Ensure firebase-tools is installed ([dea1457](https://github.com/roalcantara/nxtodo/commit/dea1457d6f89f389ad26f49fbb6855884bd658f7)), closes [#10](https://github.com/roalcantara/nxtodo/issues/10)
+
 # [1.2.0](https://github.com/roalcantara/nxtodo/compare/v1.1.0...v1.2.0) (2023-07-21)
 
 
