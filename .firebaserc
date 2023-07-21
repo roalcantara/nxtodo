@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "tasks-cf5fa"
+    "default": "tasks-cf5fa",
+    "prod": "tasks-cf5fa"
   }
 }

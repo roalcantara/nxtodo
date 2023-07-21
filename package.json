@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "clear": "rm -rf dist",
+    "purge": "npm run clear && rm -rf node-modules",
+    "reset": "npm run purge && rm package-lock.json && npm i",
     "deploy:hosting": "npx firebase deploy --only hosting",
     "deploy:functions": "npx firebase deploy --only functions",
     "deploy:firestore:rules": "npx firebase deploy --only firestore:rules"
