@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: npm install && npx nx build tasks --prod
       - name: Deploy Firestore Indexes and Rules
-        run: npm run deploy:firestore
+        run: npm install -g firebase-tools && npx nx deploy-firestore tasks --prod
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - id: firebase

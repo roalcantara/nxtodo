@@ -95,6 +95,20 @@
           "npx firebase emulators:start --only hosting,auth"
         ]
       }
+    },
+    "deploy-firestore": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false
+      },
+      "configurations": {
+        "production": {
+          "commands": [
+            "npx firebase use prod",
+            "npx firebase deploy --only firestore"
+          ]
+        }
+      }
     }
   },
   "tags": []

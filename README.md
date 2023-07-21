@@ -60,6 +60,9 @@ npm run deploy:firestore:rules
 
 # deploy firestore rules and indexes
 npm run deploy:firestore
+
+# deploy firestore rules and indexes to production
+npx nx deploy-firestore tasks --prod
 ```
 
 ## Acknowledgements
