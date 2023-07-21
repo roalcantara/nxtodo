@@ -1,59 +1,129 @@
-import styled from '@emotion/styled'
-import { collection, serverTimestamp, addDoc } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
-import { Form } from './components/form.component'
-import { Header } from './components/header.component'
-import { Todos } from './components/todos.component'
-import { db, auth, signInWithGoogle } from './db/fire.service'
-import { User } from './domain/user.model'
+import 'dracula-ui/styles/dracula-ui.css'
+import { Grid, Stack, Container } from '@mui/material'
+import { onAuthStateChanged } from 'firebase/auth'
+import { useCallback, useEffect, useState } from 'react'
+import { Form, Header, Member, Nav, Todo } from './components'
+import {
+  auth,
+  signOut,
+  signInWithGoogle,
+  stream,
+  addTask,
+  saveTask,
+  removeTask
+} from './db/fire.service'
+import { Task, User } from './domain'
 
-const StyledApp = styled.div`
-  // Your style here
-`
-
-export function App() {
-  const [user, setUser] = useState<User>()
-  const [title, setTitle] = useState('')
+export const App = () => {
+  const states = ['all', 'open', 'blocked', 'done'] as const
+  const [filter, setFilter] = useState('open')
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [currentUser, setUser] = useState<Omit<User, 'online'>>()
+  const [users, setUsers] = useState<User[]>([])
+  const [tasks, setTasks] = useState<Task[]>([])
+  const [items, setItems] = useState<Task[]>([])
+  const [counts, setCounts] = useState({
+    all: 0,
+    open: 0,
+    blocked: 0,
+    done: 0
+  })
+  const handleAuthentication = useCallback(() => {
+    if (currentUser?.id) {
+      return signOut(currentUser?.id)
+    }
+    return signInWithGoogle()
+  }, [currentUser])
 
   useEffect(() => {
-    auth.onAuthStateChanged(curr => {
+    setCounts(
+      tasks.reduce(
+        (acc, task) => {
+          acc[task.status]++
+          if (task.status === 'blocked') {
+            acc.open++
+          }
+          acc.all++
+          return acc
+        },
+        {
+          all: 0,
+          open: 0,
+          blocked: 0,
+          done: 0
+        }
+      )
+    )
+    setItems(
+      tasks.filter(
+        value =>
+          filter === 'all' ||
+          value.status === filter ||
+          (filter === 'open' && value.status === 'blocked')
+      )
+    )
+  }, [tasks, filter])
+
+  useEffect(() => {
+    stream('tasks', setTasks)
+  }, [setTasks])
+
+  useEffect(() => {
+    stream('users', setUsers)
+  }, [setUsers])
+
+  useEffect(() => {
+    onAuthStateChanged(auth, curr => {
       if (curr) {
         setUser({
-          uid: curr.uid,
-          displayName: curr.displayName,
-          photoURL: curr.photoURL
+          ...curr,
+          id: curr.uid
         })
+      } else {
+        setUser(undefined)
       }
+      setIsAuthenticated(!!curr)
     })
-  }, [])
-
-  const addTodo = (e: { preventDefault: () => void }) => {
-    e.preventDefault()
-    addDoc(collection(db, 'tasks'), {
-      title,
-      done: false,
-      blocked: false,
-      createdBy: user,
-      createdByName: user?.displayName,
-      timestamp: serverTimestamp()
-    })
-    setTitle('')
-  }
+  }, [setUser])
 
   return (
-    <StyledApp>
-      <h1>Welcome tasks</h1>
-      <div className="App">
-        <Header
-          user={user}
-          signIn={signInWithGoogle}
-          signOut={async () => auth.signOut()}
-        />
-        <h2> TODO List </h2>
-        <Form input={title} setInput={setTitle} addTodo={addTodo} />
-        <Todos input={title} />
-      </div>
-    </StyledApp>
+    <Container fixed>
+      <Header
+        label={isAuthenticated ? 'SignOut' : 'SignIn'}
+        handleLogin={handleAuthentication}
+      />
+      <Nav
+        tabs={Object.values(states)}
+        getCount={(state: string) =>
+          counts[state as (typeof states)[number]] ?? 0
+        }
+        setFilter={setFilter}
+      />
+      <Grid container spacing={2} my={2}>
+        <Grid item xs={11} md={11}>
+          {items.map((value, i) => (
+            <Todo
+              key={`tasks_${i}`}
+              task={value}
+              enabled={isAuthenticated}
+              currentUser={auth.currentUser}
+              onDelete={removeTask}
+              onSave={saveTask}
+            />
+          ))}
+        </Grid>
+        <Grid item xs={1} md={1}>
+          <Stack spacing={2}>
+            {users?.map((user, i) => (
+              <Member key={`users_${i}`} user={user} />
+            ))}
+          </Stack>
+        </Grid>
+        <Grid item xs={11} md={11}>
+          <Form enabled={isAuthenticated} onSave={addTask} />
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
 

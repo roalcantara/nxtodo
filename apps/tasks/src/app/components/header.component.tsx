@@ -1,25 +1,23 @@
-import { Button } from '@mui/material'
-import { User } from '../domain/user.model'
+import { Box } from '@mui/material'
+import { Heading, Button } from 'dracula-ui'
 
 export const Header = ({
-  user,
-  signOut,
-  signIn
+  label,
+  handleLogin
 }: {
-  user?: User
-  signOut: () => void
-  signIn: () => void
+  label?: string
+  handleLogin: () => void
 }) => (
-  <header>
-    {user?.uid ? (
-      <Button variant="contained" color="primary" onClick={signOut}>
-        Sign Out
-      </Button>
-    ) : (
-      <Button variant="contained" color="primary" onClick={signIn}>
-        Sign In
-      </Button>
-    )}
-    {user?.displayName && <h1>{user.displayName}</h1>}
-  </header>
+  <Box
+    component="span"
+    mt={1}
+    display="flex"
+    justifyContent="space-between"
+    alignItems="center"
+  >
+    <Heading color="purpleCyan">Tasks</Heading>
+    <Button m="sm" onClick={handleLogin}>
+      {label}
+    </Button>
+  </Box>
 )
