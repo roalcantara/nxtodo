@@ -25,6 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install && npx nx build tasks --prod
+      - name: Deploy Firestore Indexes and Rules
+        run: npm run deploy:firestore
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - id: firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

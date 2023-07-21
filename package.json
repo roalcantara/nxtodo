@@ -8,6 +8,7 @@
     "reset": "npm run purge && rm package-lock.json && npm i",
     "deploy:hosting": "npx firebase deploy --only hosting",
     "deploy:functions": "npx firebase deploy --only functions",
+    "deploy:firestore": "npx firebase deploy --only firestore",
     "deploy:firestore:rules": "npx firebase deploy --only firestore:rules"
   },
   "private": true,
